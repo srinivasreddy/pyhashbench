@@ -11,9 +11,20 @@ def generate_int():
 
 
 def generate_random_strings():
+    sample_size = 100000
+
     return [
-        hash("".join(np.random.choice(list("abcdefghijklmnopqrstuvwxyz"), 10)))
-        for _ in range(10000)  # Random 10-letter strings
+        hash(
+            "".join(
+                np.random.choice(
+                    list(
+                        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+                    ),
+                    np.random.randint(5, 20),
+                )
+            )
+        )
+        for _ in range(sample_size)
     ]
 
 
@@ -51,11 +62,53 @@ def chi_squared_test(hash_values, num_bins=256, confidence_level=0.95):
 
 
 def main():
+    # Generate more test data
+    sample_size = 1_000_000  # Increase sample size
 
-    # Generate some test hash values (replace with your actual hash function)
-    for values in [generate_int(), generate_random_strings(), generate_seq_strings()]:
-        is_uniform, p_value, chi_squared = chi_squared_test(values)
-        print("Chi-squared test results:")
+    int_values = [hash(i) for i in range(sample_size)]
+    seq_strings = [hash(f"test{i}") for i in range(sample_size)]
+    random_strings = [
+        hash("".join(np.random.choice(list("abcdefghijklmnopqrstuvwxyz"), 10)))
+        for _ in range(sample_size)
+    ]
+
+    # Test with larger but still manageable bin sizes
+    bin_sizes = [2**8, 2**10, 2**12, 2**14, 2**16]  # Up to 65,536 bins
+
+    for num_bins in bin_sizes:
+        print(f"\n=== Testing with {num_bins} bins (2^{int(np.log2(num_bins))}) ===")
+
+        print("\nInteger Hash Test:")
+        is_uniform, p_value, chi_squared = chi_squared_test(
+            int_values, num_bins=num_bins
+        )
+        print(f"Is uniform: {is_uniform}")
+        print(f"P-value: {p_value:.6f}")
+        print(f"Chi-squared statistic: {chi_squared:.2f}")
+
+        print("\nSequential String Hash Test:")
+        is_uniform, p_value, chi_squared = chi_squared_test(
+            seq_strings, num_bins=num_bins
+        )
+        print(f"Is uniform: {is_uniform}")
+        print(f"P-value: {p_value:.6f}")
+        print(f"Chi-squared statistic: {chi_squared:.2f}")
+
+        print("\nRandom String Hash Test:")
+        is_uniform, p_value, chi_squared = chi_squared_test(
+            random_strings, num_bins=num_bins
+        )
+        print(f"Is uniform: {is_uniform}")
+        print(f"P-value: {p_value:.6f}")
+        print(f"Chi-squared statistic: {chi_squared:.2f}")
+
+    # Try different confidence levels
+    confidence_levels = [0.90, 0.95, 0.99]
+    for conf_level in confidence_levels:
+        print(f"\n=== Testing with confidence level {conf_level} ===")
+        is_uniform, p_value, chi_squared = chi_squared_test(
+            random_strings, confidence_level=conf_level
+        )
         print(f"Is uniform: {is_uniform}")
         print(f"P-value: {p_value:.6f}")
         print(f"Chi-squared statistic: {chi_squared:.2f}")
