@@ -36,10 +36,9 @@ def chi_squared_test(hash_values, num_bins=256, confidence_level=0.95):
 
 
 def main():
-    import random
 
     # Generate some test hash values (replace with your actual hash function)
-    test_values = [random.randint(0, 1000000) for _ in range(10000)]
+    test_values = [hash(i) for i in range(10000)]
 
     # Run chi-squared test
     is_uniform, p_value, chi_squared = chi_squared_test(test_values)
