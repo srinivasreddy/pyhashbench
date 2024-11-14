@@ -4,4 +4,8 @@ version = "0.1.1"
 description = "A comprehensive testing library for your hash functions"
 readme = "README.md"
 requires-python = ">=3.8"
-dependencies = ["numpy", "scipy"]
+dependencies = [
+    "numpy",
+    "ruff>=0.7.3",
+    "scipy",
+]
