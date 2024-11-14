@@ -4,7 +4,6 @@ from decimal import Decimal
 from datetime import datetime, date, time, timedelta
 from uuid import uuid4
 from fractions import Fraction
-from complex import complex
 from collections import namedtuple, defaultdict
 from enum import Enum
 
