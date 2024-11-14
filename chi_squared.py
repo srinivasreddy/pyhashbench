@@ -6,6 +6,9 @@ from uuid import uuid4
 from fractions import Fraction
 from collections import namedtuple, defaultdict
 from enum import Enum
+from ipaddress import ip_address, IPv4Address, IPv6Address
+
+sample_size = 1_000_000
 
 
 def generate_seq_strings():
@@ -67,24 +70,105 @@ def chi_squared_test(hash_values, num_bins=256, confidence_level=0.95):
     return is_uniform, p_value, chi_squared_stat
 
 
-def main():
-    sample_size = 1_000_000
-
-    # 1. Special Numbers
-    special_numbers = [
+def generate_special_numbers():
+    # More diverse special number cases
+    return [
         hash(x)
         for x in [
             float("inf"),
             float("-inf"),
             float("nan"),
-            complex(1, 2),
-            Fraction(22, 7),  # rational numbers
-            0,
-            -0,
-            +0,
+            complex(float("inf"), float("nan")),
+            # Add more edge cases
         ]
-        * (sample_size // 8)
     ]
+
+
+def generate_empty_cases():
+    # More varied empty cases
+    return [
+        hash(x)
+        for x in [
+            None,
+            "",
+            tuple(),
+            frozenset(),
+            {},
+            [],
+            set(),
+            # Add more empty containers
+        ]
+    ]
+
+
+def generate_bytes_tests():
+    return [
+        hash(x)
+        for x in [
+            bytes([i % 256 for i in range(10)]),  # Regular bytes
+            # bytearray([i % 256 for i in range(10)]),  # Mutable bytes
+            bytes.fromhex("deadbeef"),  # Hex bytes
+            b"\x00\xff" * 10,  # Repeated patterns
+        ]
+        * (sample_size // 4)
+    ]
+
+
+class CustomHashable:
+    def __init__(self, value):
+        self.value = value
+
+    def __hash__(self):
+        return hash(self.value)
+
+
+def generate_custom_object_tests():
+    return [hash(CustomHashable(i)) for i in range(sample_size)]
+
+
+def generate_i18n_tests():
+    return [
+        hash(x)
+        for x in [
+            "Hello世界",  # Mixed scripts
+            "🌍🌎🌏",  # Emojis
+            "ñáéíóú",  # Diacritics
+            "русский",  # Cyrillic
+            "العربية",  # RTL scripts
+        ]
+        * (sample_size // 5)
+    ]
+
+
+def generate_precision_tests():
+    return [
+        hash(x)
+        for x in [
+            10**1000,  # Large integers
+            Decimal("1.23456789" * 100),  # Large decimals
+            Fraction(10**100, 7),  # Large fractions
+            float("1e-308"),  # Small floats
+        ]
+        * (sample_size // 4)
+    ]
+
+
+def generate_network_tests():
+    return [
+        hash(x)
+        for x in [
+            ip_address("127.0.0.1"),
+            ip_address("::1"),
+            IPv4Address("192.168.1.1"),
+            IPv6Address("2001:db8::1"),
+        ]
+        * (sample_size // 4)
+    ]
+
+
+def main():
+    # 1. Special Numbers
+    special_numbers = generate_special_numbers()
 
     # 2. Date/Time Objects
     datetime_hashes = [
@@ -144,6 +228,9 @@ def main():
         "Nested Structures": nested_hashes,
         "Unicode": unicode_hashes,
         "Empty/None": empty_hashes,
+        "Bytes and Bytearray": generate_bytes_tests(),
+        "Custom Objects": generate_custom_object_tests(),
+        "Network": generate_network_tests(),
     }
 
     bin_sizes = [2**8, 2**10, 2**12, 2**14, 2**16]

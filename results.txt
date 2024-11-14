@@ -1,0 +1,285 @@
+
+=== Testing with 256 bins (2^8) ===
+
+Special Numbers Test:
+Is uniform: False
+P-value: 0.000001
+Chi-squared statistic: 380.00
+
+DateTime Test:
+Is uniform: True
+P-value: 0.570327
+Chi-squared statistic: 250.36
+
+Date Test:
+Is uniform: True
+P-value: 0.498310
+Chi-squared statistic: 254.43
+
+Collections Test:
+Is uniform: True
+P-value: 0.110571
+Chi-squared statistic: 282.93
+
+UUIDs Test:
+Is uniform: True
+P-value: 0.740416
+Chi-squared statistic: 240.07
+
+Nested Structures Test:
+Is uniform: True
+P-value: 0.182746
+Chi-squared statistic: 275.29
+
+Unicode Test:
+Is uniform: True
+P-value: 0.688537
+Chi-squared statistic: 243.41
+
+Empty/None Test:
+Is uniform: False
+P-value: 0.000000
+Chi-squared statistic: 63000000.00
+
+Bytes and Bytearray Test:
+Is uniform: False
+P-value: 0.000000
+Chi-squared statistic: 63250000.00
+
+Custom Objects Test:
+Is uniform: True
+P-value: 1.000000
+Chi-squared statistic: 0.01
+
+Network Test:
+Is uniform: False
+P-value: 0.000000
+Chi-squared statistic: 95000000.00
+
+=== Testing with 1024 bins (2^10) ===
+
+Special Numbers Test:
+Is uniform: False
+P-value: 0.000000
+Chi-squared statistic: 1532.00
+
+DateTime Test:
+Is uniform: True
+P-value: 0.772205
+Chi-squared statistic: 988.97
+
+Date Test:
+Is uniform: True
+P-value: 0.563938
+Chi-squared statistic: 1015.07
+
+Collections Test:
+Is uniform: True
+P-value: 0.171785
+Chi-squared statistic: 1065.76
+
+UUIDs Test:
+Is uniform: True
+P-value: 0.694314
+Chi-squared statistic: 999.53
+
+Nested Structures Test:
+Is uniform: True
+P-value: 0.308612
+Chi-squared statistic: 1045.10
+
+Unicode Test:
+Is uniform: True
+P-value: 0.069034
+Chi-squared statistic: 1090.86
+
+Empty/None Test:
+Is uniform: False
+P-value: 0.000000
+Chi-squared statistic: 255000000.00
+
+Bytes and Bytearray Test:
+Is uniform: False
+P-value: 0.000000
+Chi-squared statistic: 255250000.00
+
+Custom Objects Test:
+Is uniform: True
+P-value: 1.000000
+Chi-squared statistic: 0.26
+
+Network Test:
+Is uniform: False
+P-value: 0.000000
+Chi-squared statistic: 255000000.00
+
+=== Testing with 4096 bins (2^12) ===
+
+Special Numbers Test:
+Is uniform: False
+P-value: 0.000000
+Chi-squared statistic: 6140.00
+
+DateTime Test:
+Is uniform: True
+P-value: 0.361622
+Chi-squared statistic: 4126.46
+
+Date Test:
+Is uniform: True
+P-value: 0.419842
+Chi-squared statistic: 4112.67
+
+Collections Test:
+Is uniform: True
+P-value: 0.206049
+Chi-squared statistic: 4169.00
+
+UUIDs Test:
+Is uniform: True
+P-value: 0.616299
+Chi-squared statistic: 4067.63
+
+Nested Structures Test:
+Is uniform: False
+P-value: 0.043070
+Chi-squared statistic: 4251.59
+
+Unicode Test:
+Is uniform: True
+P-value: 0.614457
+Chi-squared statistic: 4068.06
+
+Empty/None Test:
+Is uniform: False
+P-value: 0.000000
+Chi-squared statistic: 1023000000.00
+
+Bytes and Bytearray Test:
+Is uniform: False
+P-value: 0.000000
+Chi-squared statistic: 1023250000.00
+
+Custom Objects Test:
+Is uniform: True
+P-value: 1.000000
+Chi-squared statistic: 2.03
+
+Network Test:
+Is uniform: False
+P-value: 0.000000
+Chi-squared statistic: 1023000000.00
+
+=== Testing with 16384 bins (2^14) ===
+
+Special Numbers Test:
+Is uniform: False
+P-value: 0.000000
+Chi-squared statistic: 24572.00
+
+DateTime Test:
+Is uniform: True
+P-value: 0.618666
+Chi-squared statistic: 16327.73
+
+Date Test:
+Is uniform: True
+P-value: 0.914929
+Chi-squared statistic: 16135.29
+
+Collections Test:
+Is uniform: False
+P-value: 0.028014
+Chi-squared statistic: 16730.65
+
+UUIDs Test:
+Is uniform: True
+P-value: 0.725213
+Chi-squared statistic: 16274.26
+
+Nested Structures Test:
+Is uniform: False
+P-value: 0.036120
+Chi-squared statistic: 16709.87
+
+Unicode Test:
+Is uniform: True
+P-value: 0.838933
+Chi-squared statistic: 16203.77
+
+Empty/None Test:
+Is uniform: False
+P-value: 0.000000
+Chi-squared statistic: 4095000000.00
+
+Bytes and Bytearray Test:
+Is uniform: False
+P-value: 0.000000
+Chi-squared statistic: 4095250000.00
+
+Custom Objects Test:
+Is uniform: True
+P-value: 1.000000
+Chi-squared statistic: 9.11
+
+Network Test:
+Is uniform: False
+P-value: 0.000000
+Chi-squared statistic: 4095000000.00
+
+=== Testing with 65536 bins (2^16) ===
+
+Special Numbers Test:
+Is uniform: False
+P-value: 0.000000
+Chi-squared statistic: 98300.00
+
+DateTime Test:
+Is uniform: True
+P-value: 0.521342
+Chi-squared statistic: 65514.96
+
+Date Test:
+Is uniform: True
+P-value: 0.876725
+Chi-squared statistic: 65115.71
+
+Collections Test:
+Is uniform: True
+P-value: 0.076878
+Chi-squared statistic: 66052.09
+
+UUIDs Test:
+Is uniform: True
+P-value: 0.752774
+Chi-squared statistic: 65287.29
+
+Nested Structures Test:
+Is uniform: True
+P-value: 0.209640
+Chi-squared statistic: 65827.17
+
+Unicode Test:
+Is uniform: True
+P-value: 0.689677
+Chi-squared statistic: 65355.31
+
+Empty/None Test:
+Is uniform: False
+P-value: 0.000000
+Chi-squared statistic: 16383000000.00
+
+Bytes and Bytearray Test:
+Is uniform: False
+P-value: 0.000000
+Chi-squared statistic: 16383250000.00
+
+Custom Objects Test:
+Is uniform: True
+P-value: 1.000000
+Chi-squared statistic: 823.85
+
+Network Test:
+Is uniform: False
+P-value: 0.000000
+Chi-squared statistic: 16383000000.00
