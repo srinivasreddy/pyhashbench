@@ -1,5 +1,6 @@
 import numpy as np
 from scipy import stats
+from decimal import Decimal
 
 
 def generate_seq_strings():
@@ -62,52 +63,69 @@ def chi_squared_test(hash_values, num_bins=256, confidence_level=0.95):
 
 
 def main():
-    # Generate more test data
-    sample_size = 1_000_000  # Increase sample size
+    sample_size = 1_000_000
 
-    int_values = [hash(i) for i in range(sample_size)]
-    seq_strings = [hash(f"test{i}") for i in range(sample_size)]
-    random_strings = [
-        hash("".join(np.random.choice(list("abcdefghijklmnopqrstuvwxyz"), 10)))
-        for _ in range(sample_size)
+    # Generate different types of floating point numbers
+    float_sequential = [hash(float(i / 100)) for i in range(sample_size)]
+    float_random = [hash(np.random.random()) for _ in range(sample_size)]
+    float_scientific = [hash(float(f"{i}e-10")) for i in range(sample_size)]
+
+    # Generate Decimal numbers
+    decimal_sequential = [hash(Decimal(str(i / 100))) for i in range(sample_size)]
+    decimal_random = [
+        hash(Decimal(str(np.random.random()))) for _ in range(sample_size)
     ]
+    decimal_scientific = [hash(Decimal(f"{i}e-10")) for i in range(sample_size)]
 
-    # Test with larger but still manageable bin sizes
-    bin_sizes = [2**8, 2**10, 2**12, 2**14, 2**16]  # Up to 65,536 bins
+    # Test with different bin sizes
+    bin_sizes = [2**8, 2**10, 2**12, 2**14, 2**16]
 
     for num_bins in bin_sizes:
         print(f"\n=== Testing with {num_bins} bins (2^{int(np.log2(num_bins))}) ===")
 
-        print("\nInteger Hash Test:")
+        print("\nSequential Float Test:")
         is_uniform, p_value, chi_squared = chi_squared_test(
-            int_values, num_bins=num_bins
+            float_sequential, num_bins=num_bins
         )
         print(f"Is uniform: {is_uniform}")
         print(f"P-value: {p_value:.6f}")
         print(f"Chi-squared statistic: {chi_squared:.2f}")
 
-        print("\nSequential String Hash Test:")
+        print("\nRandom Float Test:")
         is_uniform, p_value, chi_squared = chi_squared_test(
-            seq_strings, num_bins=num_bins
+            float_random, num_bins=num_bins
         )
         print(f"Is uniform: {is_uniform}")
         print(f"P-value: {p_value:.6f}")
         print(f"Chi-squared statistic: {chi_squared:.2f}")
 
-        print("\nRandom String Hash Test:")
+        print("\nScientific Notation Float Test:")
         is_uniform, p_value, chi_squared = chi_squared_test(
-            random_strings, num_bins=num_bins
+            float_scientific, num_bins=num_bins
         )
         print(f"Is uniform: {is_uniform}")
         print(f"P-value: {p_value:.6f}")
         print(f"Chi-squared statistic: {chi_squared:.2f}")
 
-    # Try different confidence levels
-    confidence_levels = [0.90, 0.95, 0.99]
-    for conf_level in confidence_levels:
-        print(f"\n=== Testing with confidence level {conf_level} ===")
+        print("\nSequential Decimal Test:")
         is_uniform, p_value, chi_squared = chi_squared_test(
-            random_strings, confidence_level=conf_level
+            decimal_sequential, num_bins=num_bins
+        )
+        print(f"Is uniform: {is_uniform}")
+        print(f"P-value: {p_value:.6f}")
+        print(f"Chi-squared statistic: {chi_squared:.2f}")
+
+        print("\nRandom Decimal Test:")
+        is_uniform, p_value, chi_squared = chi_squared_test(
+            decimal_random, num_bins=num_bins
+        )
+        print(f"Is uniform: {is_uniform}")
+        print(f"P-value: {p_value:.6f}")
+        print(f"Chi-squared statistic: {chi_squared:.2f}")
+
+        print("\nScientific Notation Decimal Test:")
+        is_uniform, p_value, chi_squared = chi_squared_test(
+            decimal_scientific, num_bins=num_bins
         )
         print(f"Is uniform: {is_uniform}")
         print(f"P-value: {p_value:.6f}")
